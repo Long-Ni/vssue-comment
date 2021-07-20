@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Redis 数据类型 | Ni&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="$page.excerpt">
+    
+    <link rel="preload" href="/vssue-comment/assets/css/0.styles.02c2761a.css" as="style"><link rel="preload" href="/vssue-comment/assets/js/app.9fa4f4bb.js" as="script"><link rel="preload" href="/vssue-comment/assets/js/13.044f1fde.js" as="script"><link rel="preload" href="/vssue-comment/assets/js/3.f0de84e7.js" as="script"><link rel="preload" href="/vssue-comment/assets/js/35.3bbd155f.js" as="script"><link rel="prefetch" href="/vssue-comment/assets/js/10.23cc3d6b.js"><link rel="prefetch" href="/vssue-comment/assets/js/11.c63e2dcc.js"><link rel="prefetch" href="/vssue-comment/assets/js/12.d7671ee7.js"><link rel="prefetch" href="/vssue-comment/assets/js/14.399fc32e.js"><link rel="prefetch" href="/vssue-comment/assets/js/15.37bef016.js"><link rel="prefetch" href="/vssue-comment/assets/js/16.2ae3cc61.js"><link rel="prefetch" href="/vssue-comment/assets/js/17.10c0352f.js"><link rel="prefetch" href="/vssue-comment/assets/js/18.02aac107.js"><link rel="prefetch" href="/vssue-comment/assets/js/19.ac0b8b1d.js"><link rel="prefetch" href="/vssue-comment/assets/js/20.656ccc17.js"><link rel="prefetch" href="/vssue-comment/assets/js/21.d1f01d1a.js"><link rel="prefetch" href="/vssue-comment/assets/js/22.6e251d71.js"><link rel="prefetch" href="/vssue-comment/assets/js/23.caaa7b12.js"><link rel="prefetch" href="/vssue-comment/assets/js/24.33d428f1.js"><link rel="prefetch" href="/vssue-comment/assets/js/25.207f6b5f.js"><link rel="prefetch" href="/vssue-comment/assets/js/26.398d8fee.js"><link rel="prefetch" href="/vssue-comment/assets/js/27.d4ae83e5.js"><link rel="prefetch" href="/vssue-comment/assets/js/28.66c58624.js"><link rel="prefetch" href="/vssue-comment/assets/js/29.a6686645.js"><link rel="prefetch" href="/vssue-comment/assets/js/30.242e18b7.js"><link rel="prefetch" href="/vssue-comment/assets/js/31.7da4eecc.js"><link rel="prefetch" href="/vssue-comment/assets/js/32.9b8f3ea0.js"><link rel="prefetch" href="/vssue-comment/assets/js/33.075dbe36.js"><link rel="prefetch" href="/vssue-comment/assets/js/34.838ce186.js"><link rel="prefetch" href="/vssue-comment/assets/js/36.a07ab564.js"><link rel="prefetch" href="/vssue-comment/assets/js/37.50ef72a3.js"><link rel="prefetch" href="/vssue-comment/assets/js/38.75b498ed.js"><link rel="prefetch" href="/vssue-comment/assets/js/39.3b1e3afb.js"><link rel="prefetch" href="/vssue-comment/assets/js/4.79c2a3ee.js"><link rel="prefetch" href="/vssue-comment/assets/js/40.0a6fdf1b.js"><link rel="prefetch" href="/vssue-comment/assets/js/41.9be8ec60.js"><link rel="prefetch" href="/vssue-comment/assets/js/42.9ce4d2b3.js"><link rel="prefetch" href="/vssue-comment/assets/js/43.c76f9c55.js"><link rel="prefetch" href="/vssue-comment/assets/js/44.4749cc3b.js"><link rel="prefetch" href="/vssue-comment/assets/js/45.605778e4.js"><link rel="prefetch" href="/vssue-comment/assets/js/46.fd2913a3.js"><link rel="prefetch" href="/vssue-comment/assets/js/47.5b787534.js"><link rel="prefetch" href="/vssue-comment/assets/js/48.7cf6064e.js"><link rel="prefetch" href="/vssue-comment/assets/js/49.ffa11e3d.js"><link rel="prefetch" href="/vssue-comment/assets/js/5.6a98c4eb.js"><link rel="prefetch" href="/vssue-comment/assets/js/50.69284de8.js"><link rel="prefetch" href="/vssue-comment/assets/js/6.0cbbe057.js"><link rel="prefetch" href="/vssue-comment/assets/js/7.feaf1269.js"><link rel="prefetch" href="/vssue-comment/assets/js/8.9c40e8a4.js"><link rel="prefetch" href="/vssue-comment/assets/js/9.b2c8bfda.js"><link rel="prefetch" href="/vssue-comment/assets/js/vuejs-paginate.8412c6fc.js">
+    <link rel="stylesheet" href="/vssue-comment/assets/css/0.styles.02c2761a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-blog__global-layout"><section id="header-wrapper"><header id="header"><div class="header-wrapper"><div class="title"><a href="/vssue-comment/" class="nav-link home-link">Ni's Blog </a></div> <div class="header-right-wrap"><ul class="nav"><li class="nav-item"><a href="/vssue-comment/" class="nav-link">Blog</a></li><li class="nav-item"><a href="/vssue-comment/tag/" class="nav-link">Tags</a></li></ul> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></div></header></section> <div id="mobile-header"><div class="mobile-header-bar"><div class="mobile-header-title"><a href="/vssue-comment/" class="nav-link mobile-home-link">Ni's Blog </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div> <div class="mobile-menu-wrapper"><hr class="menu-divider"> <ul class="mobile-nav"><li class="mobile-nav-item"><a href="/vssue-comment/" class="nav-link">Blog</a></li><li class="mobile-nav-item"><a href="/vssue-comment/tag/" class="nav-link">Tags</a></li> <li class="mobile-nav-item"><!----></li></ul></div></div></div> <div class="content-wrapper"><div id="vuepress-theme-blog__post-layout"><article itemscope="itemscope" itemtype="https://schema.org/BlogPosting" class="vuepress-blog-theme-content"><header><h1 itemprop="name headline" class="post-title">
+        Redis 数据类型
+      </h1> <div class="post-meta"><div itemprop="publisher author" itemtype="http://schema.org/Person" itemscope="itemscope" class="post-meta-author"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-navigation"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg> <span itemprop="name">Ni</span> <span itemprop="address">   in 大连</span></div> <div class="post-meta-date"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <time pubdate itemprop="datePublished" datetime="2020-12-04 09:00:00+0800">
+      Fri Dec 04 2020
+    </time></div> <ul itemprop="keywords" class="post-meta-tags"><li class="post-tag" data-v-42ccfcd5><a href="/vssue-comment/tag/Redis" data-v-42ccfcd5><span data-v-42ccfcd5>Redis</span></a></li></ul></div></header> <div itemprop="articleBody" class="content__default"><p>Redis 的数据类型与抽象</p> <p>Redis 不是简单得键值存储。它实际是一种数据结构服务器，支持不同类型的值。</p> <p>在传统的键值存储中，是将字符串键和字符串值相关联。Redis 中该值不在局限于简单的字符串，还可以容纳更复杂的数据结构。</p> <p>目录：</p> <div><ul><li><a href="/vssue-comment/2020/12/04/_03-redis-data-types/#_1-redis-常见数据类型">1. Redis 常见数据类型</a><ul><li><a href="/vssue-comment/2020/12/04/_03-redis-data-types/#_1-1-string">1.1. String</a></li><li><a href="/vssue-comment/2020/12/04/_03-redis-data-types/#_1-2-lists">1.2. Lists</a></li><li><a href="/vssue-comment/2020/12/04/_03-redis-data-types/#_1-3-sets">1.3. Sets</a></li><li><a href="/vssue-comment/2020/12/04/_03-redis-data-types/#_1-4-sorted-sets">1.4. Sorted sets</a></li><li><a href="/vssue-comment/2020/12/04/_03-redis-data-types/#_1-5-hashes">1.5. Hashes</a></li></ul></li><li><a href="/vssue-comment/2020/12/04/_03-redis-data-types/#_2-其他数据类型">2. 其他数据类型</a><ul><li><a href="/vssue-comment/2020/12/04/_03-redis-data-types/#_2-1-bitmaps-and-hyperloglogs">2.1. Bitmaps and HyperLogLogs</a></li><li><a href="/vssue-comment/2020/12/04/_03-redis-data-types/#_2-2-streams">2.2. Streams</a></li></ul></li></ul></div> <h2 id="_1-redis-常见数据类型"><a href="#_1-redis-常见数据类型" class="header-anchor">#</a> 1. Redis 常见数据类型</h2> <h3 id="_1-1-string"><a href="#_1-1-string" class="header-anchor">#</a> 1.1. String</h3> <p>String 是 Redis 值的最基本类型。</p> <p>Redis String 是二进制安全的。这意味着 Redis 字符串可以包含任何类型的数据，例如 JPEG 图像或者序列化的 Ruby 对象。</p> <p>String 的最大长度是 512 MB 。</p> <p><strong>Redis String 使用：</strong></p> <ul><li><p>使用 INCR 系列中的命令（INCR，DECR，INCRBY）将 String 用作原子计数器。</p> <p><code>INCR</code>：将存储在 key 上的数字增加 1。如果 key 不存在，则在执行操作前将其设为 0。如果 key 包含一个错误类型的值，或者包含一个不能用整数表示的字符串，将返回一个错误。此操作仅限于64位有符号的整数。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; <span class="token function">set</span> key001 <span class="token string">&quot;10&quot;</span>
+OK
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; INCR key001
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 11
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; get key001
+<span class="token string">&quot;11&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; <span class="token function">set</span> key002 <span class="token string">&quot;test-string&quot;</span>
+OK
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; INCR key002
+<span class="token punctuation">(</span>error<span class="token punctuation">)</span> ERR value is not an integer or out of range
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div><p><code>DECR</code>：将存储在 key 上的数字减 1。如果 key 不存在，则在执行操作前将其设为 0。如果 key 包含一个错误类型的值，或者包含一个不能用整数表示的字符串，将返回一个错误。此操作仅限于64位有符号的整数。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; <span class="token function">set</span> key003 <span class="token string">&quot;10&quot;</span>
+OK
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; DECR key003
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 9
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; get key003
+<span class="token string">&quot;9&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; <span class="token function">set</span> key004 <span class="token string">&quot;234293482390480948029348230948&quot;</span>
+OK
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; DECR key004
+<span class="token punctuation">(</span>error<span class="token punctuation">)</span> ERR value is not an integer or out of range
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; get key004
+<span class="token string">&quot;234293482390480948029348230948&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div><p><code>INCRBY</code>：将存储在 key 上的数字按增量递增。如果 key 不存在，则在执行操作前将其设为 0。如果 key 包含一个错误类型的值，或者包含一个不能用整数表示的字符串，将返回一个错误。此操作仅限于64位有符号的整数。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; <span class="token function">set</span> key005 <span class="token string">&quot;10&quot;</span>
+OK
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; INCRBY key005 5
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 15
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; get key005
+<span class="token string">&quot;15&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div></li> <li><p>使用 APPEND 命令附加 String 。</p> <p><code>APPEND</code>：如果 key 已经存在，并且是一个字符串，那么这条命令就会在字符串的末尾添加值。如果 key 不存在，则创建并设置为空字符串，所以 APPEND 将类似于这种特殊情况下的 SET。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; EXISTS key006
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 0
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; APPEND key006 <span class="token string">&quot;Hello&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 5
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; APPEND key006 <span class="token string">&quot; World&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 11
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; get key006
+<span class="token string">&quot;Hello World&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div></li> <li><p>使用 GETRANGE 和 SETRANGE 将 String 用作随机访问向量。</p> <p><code>GETRANGE</code>：返回存储在 key 处的字符串值的子串，由偏移量 start 和 end 决定（两者都是包含的）。负偏移量可以用来提供一个从字符串末尾开始的偏移量。所以 -1 表示最后一个字符，-2 表示倒数第二个字符，以此类推。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; <span class="token function">set</span> key007 <span class="token string">&quot;This is a string&quot;</span>
+OK
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; GETRANGE key007 0 3
+<span class="token string">&quot;This&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; GETRANGE key007 <span class="token operator">-</span>3 <span class="token operator">-</span>1
+<span class="token string">&quot;ing&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; GETRANGE key007 0 <span class="token operator">-</span>1
+<span class="token string">&quot;This is a string&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; GETRANGE key007 10 100
+<span class="token string">&quot;string&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; GETRANGE key007 100 200
+<span class="token string">&quot;&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div><p><code>SETRANGE</code>：从指定的偏移量开始，覆盖存储在 key 的部分字符串，覆盖整个 value 的长度。如果偏移量大于 key 处字符串的当前长度，则用零字节填充字符串，以使偏移量适合。不存在的 key 被认为是空字符串，所以这条命令将确保它持有一个足够大的字符串，以便能够在偏移量处设置值。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; <span class="token function">set</span> key008 <span class="token string">&quot;Hello World&quot;</span>
+OK
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SETRANGE key008 6 <span class="token string">&quot;Redis&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 11
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; get key008
+<span class="token string">&quot;Hello Redis&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SETRANGE key009 6 <span class="token string">&quot;Redis&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 11
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; get key009
+<span class="token string">&quot;\x00\x00\x00\x00\x00\x00Redis&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div></li> <li><p>在很小的空间内编码大量数据，或者使用 GETBIT 和 SETBIT 创建 Redis 支持的 Bloom Filter 。</p> <p><code>GETBIT</code>：返回存储在 key 的字符串值中偏移量的位值。当偏移量超出字符串长度时，假设字符串是一个 0 位的连续空间。当 key 不存在时，假设为空字符串，所以偏移量总是超出范围，值也假设为 0 位的连续空间。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SETBIT key010 7 1
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 0
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; GETBIT key010 0
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 0
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; GETBIT key010 7
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; GETBIT key010 100
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 0
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div><p><code>SETBIT</code>：设置或清除存储在 key 的字符串值中偏移的位。位的设置或清除取决于值，它可以是 0 或 1。当 key 不存在时，会创建一个新的字符串值。字符串会被增长，以确保它能在偏移量处容纳一个位。偏移量参数必须大于或等于0，并且小于232（这限制了位图到512MB）。当键处的字符串被增长时，增加的位被设置为0。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SETBIT key011 7 1
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 0
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; get key011
+<span class="token string">&quot;\x01&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SETBIT key011 7 0
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; get key011
+<span class="token string">&quot;\x00&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div></li></ul> <h3 id="_1-2-lists"><a href="#_1-2-lists" class="header-anchor">#</a> 1.2. Lists</h3> <p>Redis Lists 只是简单的字符串列表，按插入顺序排序。</p> <p>可以将元素添加到 Redis Lists 的头部（左侧）或者尾部（右侧）。</p> <p>LPUSH 命令在头部插入新元素。 RPUSH 命令在尾部插入新元素。针对空的键执行此操作时，将会创建新的 Lists 。同样，如果列表操作将列表清空了，则该键从键空间中删除。</p> <p>List 的最大长度是 2<sup>32</sup> - 1 个元素（4294967295，每个 List 的元素可以超过 40 亿个）。</p> <p>从时间复杂度的角度来看， Redis Lists 的主要功能是支持恒定时间插入和删除头部和尾部附近的元素，即使有数百万个插入项也是如此。 在列表的极端附近，访问元素的速度非常快，但是如果您尝试访问一个很大的列表的中间位置，则访问元素的速度会很慢，因为这是 O(N) 操作。</p> <p><strong>Redis Lists 使用：</strong></p> <ul><li><p>在社交网络中对时间轴建模，使用 LPUSH 在用户时间轴中添加新元素，并使用 LRANGE 来检索一些最近插入的项目。</p> <p><code>LPUSH</code>：将所有指定的值插入存储在 key 的列表头部。如果 key 不存在，则在执行 push 操作之前，将其创建为空列表。当 key 持有的值不是列表时，将返回一个错误。只需在命令末尾指定多个参数，就可以使用一个命令调用推送多个元素。从最左边的元素到最右边的元素，元素一个接一个地插入到列表的头部。因此，例如 <code>LPUSH mylist a b c</code> 命令将产生一个包含 c 作为第一个元素、b 作为第二个元素和 a 作为第三个元素的列表。</p> <p><code>LRANGE</code>：返回存储在 key 处的列表中的指定元素。偏移量 start 和 stop 是基于 0 的索引，0 是列表的第一个元素（列表的头部），1 是下一个元素，以此类推。这些偏移量也可以是负数，表示从列表的最后开始的偏移量。例如，-1 是列表的最后一个元素，-2 是倒数第二个元素，以此类推。</p> <p><code>RPUSH</code>：在 key 存储的列表尾部插入所有指定的值。如果 key 不存在，则在执行push操作之前，将其创建为空列表。当 key 持有的值不是列表时，将返回一个错误。只需在命令末尾指定多个参数，就可以使用一个命令调用推送多个元素。从最左边的元素到最右边的元素，元素是一个接一个地插入到列表的尾部。因此，例如 <code>RPUSH mylist a b c</code> 命令将产生一个包含 a 作为第一个元素、b 作为第二个元素和 c 作为第三个元素的列表。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; LPUSH key013 <span class="token string">&quot;world&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; LPUSH key013 <span class="token string">&quot;hello&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 2
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; LRANGE key013 0 <span class="token operator">-</span>1
+1<span class="token punctuation">)</span> <span class="token string">&quot;hello&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;world&quot;</span>
+
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; RPUSH key014 <span class="token string">&quot;one&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; RPUSH key014 <span class="token string">&quot;two&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 2
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; RPUSH key014 <span class="token string">&quot;three&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 3
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; LRANGE key014 0 0
+1<span class="token punctuation">)</span> <span class="token string">&quot;one&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; LRANGE key014 <span class="token operator">-</span>3 2
+1<span class="token punctuation">)</span> <span class="token string">&quot;one&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+3<span class="token punctuation">)</span> <span class="token string">&quot;three&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; LRANGE key014 <span class="token operator">-</span>100 100
+1<span class="token punctuation">)</span> <span class="token string">&quot;one&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+3<span class="token punctuation">)</span> <span class="token string">&quot;three&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; LRANGE key014 5 10
+<span class="token punctuation">(</span>empty list or <span class="token function">set</span><span class="token punctuation">)</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div></li> <li><p>可以将 LPUSH 与 LTRIM 一起使用，去创建一个列表，该列表不超过给定数量的元素，而只记住最新的 N 个元素。</p> <p><code>LTRIM</code>：修剪一个现有的列表，使其只包含指定的元素范围。start 和 stop 都是基于 0 的索引，其中 0 是列表的第一个元素（头部），1 是下一个元素，以此类推。例如：<code>LTRIM foobar 0 2</code> 将修改存储在 foobar 的列表，只保留列表的前三个元素。start 和 end 也可以是负数，表示与列表末尾的偏移量，其中 -1 是列表的最后一个元素，-2 是倒数第二个元素，以此类推。超出范围的索引不会产生错误：如果 start 大于列表的结束，或者 start &gt; end，结果将是一个空列表（会导致 key 被删除）。如果 end 大于列表末尾，Redis 会把它当作列表的最后一个元素。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; RPUSH key016 <span class="token string">&quot;one&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; RPUSH key016 <span class="token string">&quot;two&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 2
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; RPUSH key016 <span class="token string">&quot;three&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 3
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; LTRIM key016 1 <span class="token operator">-</span>1
+OK
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; LRANGE key016 0 <span class="token operator">-</span>1
+1<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;three&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div></li> <li><p>列表可以用作消息传递原函数。例如，用于创建后台作业的 Resque Ruby 库。</p></li> <li><p>可以使用列表做更多的事情，此数据类型支持许多命令，包括诸如 BLPOP 之类的阻止命令。</p> <p><code>BLPOP</code> 是一个阻塞列表弹出的基元。它是 <code>LPOP</code> 的阻塞版本，因为当没有元素从任何给定列表中弹出时，它就会阻塞连接。一个元素从第一个非空的列表头弹出，按照给定键的顺序进行检查。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; <span class="token function">DEL</span> key017 key018
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 0
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; RPUSH key017 a b c
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 3
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; BLPOP key017 key018 0
+1<span class="token punctuation">)</span> <span class="token string">&quot;key017&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;a&quot;</span>
+</code></pre></div></li></ul> <h3 id="_1-3-sets"><a href="#_1-3-sets" class="header-anchor">#</a> 1.3. Sets</h3> <p>Redis Sets 是字符串的无序集合。 可以在 O(1) 中添加，删除元素或者测试成员是否存在（恒定时间，无论Set中包含的成员数量如何）。</p> <p>Redis Sets 具有不允许重复成员的理想属性。 多次添加同一成员将导致集合具有该成员的单个副本。<strong>实际上，这意味着添加成员时不需要检查是否存在，直接进行添加操作</strong>。</p> <p>关于 Redis Sets 的一个非常有趣的事情是，它们支持服务器端许多命令来从现有集合开始计算集合，因此可以在很短的时间内完成集的并集，交集，差集。</p> <p>Set 的最大长度是 2<sup>32</sup> - 1 个成员（4294967295，每个 Set 的成员可以超过 40 亿个）。</p> <p><strong>Redis Sets 使用：</strong></p> <ul><li><p>可以使用 Redis Sets 来跟踪唯一的事物。 例如，如果知道访问给定博客帖子的所有唯一 IP 地址，只需要每次处理页面视图时使用 SADD 。 确保不会插入重复的 IP 。</p> <p><code>SADD</code>： 将指定的成员添加到存储在 key 的集合中。已经是这个集合的成员的指定成员将被忽略。如果 key 不存在，那么在添加指定成员之前会创建一个新的集合。当存储在 key 处的值不是一个集合时，将返回一个错误。
+<code>SMEMBERS</code>：返回存储在 key 的集合值的所有成员。这与使用一个参数 key 运行 <code>SINTER</code> 的效果相同。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key019 <span class="token string">&quot;Hello&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key019 <span class="token string">&quot;World&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key019 <span class="token string">&quot;World&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 0
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SMEMBERS key019
+1<span class="token punctuation">)</span> <span class="token string">&quot;Hello&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;World&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div></li> <li><p>Redis Sets 可以很好地表示关系。例如， 使用 Redis 创建标签系统，一个 Set 代表每个标签。 使用 SADD 命令可以将具有给定标签的所有对象的所有 ID 添加到代表该特定标签的 Set 中。 使用 SINTER 命令可以将同时具有三个不同的标签的所有对象的所有 ID 添加到代表该特定标签的 Set 中。</p> <p><code>SINTER</code>：返回所有给定集合的交集所产生的集合成员。不存在的键被认为是空集。当其中一个键是空集时，产生的集也是空的(因为集与空集相交的结果总是空集)。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key020 a
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key020 b
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key020 c
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key021 c
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key021 d
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key021 e
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SINTER key020 key021
+1<span class="token punctuation">)</span> <span class="token string">&quot;c&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div></li> <li><p>使用 SPOP 或 SRANDMEMBER 命令随机提取 Sets 中的成员。</p> <p><code>SPOP</code>：从存储在 key 的集合中删除并返回一个或多个随机元素。 这个操作类似于 <code>SRANDMEMBER</code>，从一个集合中返回一个或多个随机元素，但不删除它。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key022 one
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key022 two
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key022 three
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SPOP key022
+<span class="token string">&quot;one&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SMEMBERS key022
+1<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;three&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key022 four
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key022 five
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SMEMBERS key022
+1<span class="token punctuation">)</span> <span class="token string">&quot;five&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;four&quot;</span>
+3<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+4<span class="token punctuation">)</span> <span class="token string">&quot;three&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SPOP key022 3
+1<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;three&quot;</span>
+3<span class="token punctuation">)</span> <span class="token string">&quot;five&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SMEMBERS key022
+1<span class="token punctuation">)</span> <span class="token string">&quot;four&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div><p><code>SRANDMEMBER</code>：当只用 key 参数调用时，从存储在 key 处的集合值中返回一个随机元素。从 Redis 2.6 版本开始，当使用额外的 count 参数调用时，如果 count 为正值，则返回一个由不同元素组成的数组。如果用负数调用，行为就会改变，命令可以多次返回同一个元素。在这种情况下，返回的元素个数是指定 count 的绝对值。当只用 key 参数调用时，操作类似于  <code>SPOP</code>，但是 <code>SPOP</code> 也会从集合中删除随机选择的元素，而 <code>SRANDMEMBER</code> 只会返回一个随机元素，而不会以任何方式改变原始集合。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SADD key023 one two three
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 3
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SRANDMEMBER key023
+<span class="token string">&quot;three&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SRANDMEMBER key023 2
+1<span class="token punctuation">)</span> <span class="token string">&quot;one&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;three&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SRANDMEMBER key023 <span class="token operator">-</span>5
+1<span class="token punctuation">)</span> <span class="token string">&quot;one&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+3<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+4<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+5<span class="token punctuation">)</span> <span class="token string">&quot;three&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; SMEMBERS key023
+1<span class="token punctuation">)</span> <span class="token string">&quot;one&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+3<span class="token punctuation">)</span> <span class="token string">&quot;three&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div></li></ul> <h3 id="_1-4-sorted-sets"><a href="#_1-4-sorted-sets" class="header-anchor">#</a> 1.4. Sorted sets</h3> <p>与 Redis Sets 类似，Redis Sorted Sets 是非重复的字符串集合。 区别在于，Sorted Sets 的每个成员都与 <em>Score</em> （得分）相关联，该 score 用于从最小得分到最大得分中获取 Sorted Set 的排序。 虽然成员是唯一的，但分数可能会重复。</p> <p>使用 Sorted Sets ，您可以以非常快的方式（在与元素数量的对数成比例的时间内）去添加，删除或更新元素。 由于元素是按顺序排列的，而不是随后进行排序的。因此也可以非常快速地按分数或按排名（位置）获得范围。</p> <p>访问 Sorted Set 的中间位置也非常快，因此可以将 Sorted Sets 用作非重复元素的智能 Lists 。从中可以快速访问所需的所有内容：元素排序，快速测试元素是否存在，对中间元素的快速访问 ！</p> <p>简而言之，使用 Sorted Sets，可以执行许多性能出色的任务，而这些任务实际上很难在其他类型的数据库中建模。</p> <p>Sorted Sets可能是最高级的 Redis 数据类型，因此花一些时间检查 Sorted Set 命令的完整列表，去发现可以使用Redis做什么！</p> <p><strong>Sorted Sets 使用：</strong></p> <ul><li><p>在大型在线游戏中排行榜，每次提交新分数时，您都可以使用 ZADD 对其进行更新。 您可以轻松地使用 ZRANGE 吸引顶级用户，比如使用 ZRANK 返回给定用户名在列表中的排名。 一起使用 ZRANK 和 ZRANGE 可以向用户显示得分与给定用户相似的得分。 一切都很快。</p> <p><code>ZADD</code>：将所有指定成员的指定分数添加到存储在 key 处的排序集合中。可以指定多个分数、成员对。如果一个指定的成员已经是排序集的成员，那么分数会被更新，并在正确的位置重新插入元素，以确保正确的排序。如果 key 不存在，就会创建一个新的排序集，指定的成员是唯一的成员，就像排序集是空的一样。如果 key 存在，但不持有一个排序集，则返回一个错误。分数值应该是一个双精度浮点数的字符串表示。+inf 和 -inf 值也是有效值。</p> <p><code>ZRANGE</code>：返回存储在 key 处的排序集合中指定的元素范围。元素被认为是由最低分到最高分排序。对于分数相同的元素，使用词法排序。当你需要元素从最高分到最低分排序时，请参见 <code>ZREVRANGE</code> (对于分数相同的元素，则使用降序词法排序)。开始和停止都是基于零的索引，0 是第一个元素，1 是下一个元素，以此类推。它们也可以是负数，表示从排序集的末端开始的偏移，-1 是排序集的最后一个元素，-2 是倒数第二个元素，以此类推。start 和 stop 是允许的，所以例如 <code>ZRANGE myzset 0 1</code> 将返回排序集的第一个和第二个元素。超出范围的索引不会产生错误。如果 start 大于排序集中最大的索引，或者 start &gt; stop，将返回一个空列表。如果 stop 大于排序集的末尾，Redis 将把它当作排序集的最后一个元素。可以传递 <code>WITHSCORES</code> 选项，以便将元素的分数和元素一起返回。返回的列表将包含 value1,core1,...,valueN,coreN 而不是 value1,...,valueN。客户端库可以自由地返回一个更合适的数据类型（建议：一个带有(value, score)数组、元组的数组）。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZADD key026 1 <span class="token string">&quot;one&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZADD key026 1 <span class="token string">&quot;uno&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZADD key026 2 <span class="token string">&quot;two&quot;</span> 3 <span class="token string">&quot;three&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 2
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZRANGE key026 0 <span class="token operator">-</span>1 WITHSCORES
+1<span class="token punctuation">)</span> <span class="token string">&quot;one&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;1&quot;</span>
+3<span class="token punctuation">)</span> <span class="token string">&quot;uno&quot;</span>
+4<span class="token punctuation">)</span> <span class="token string">&quot;1&quot;</span>
+5<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+6<span class="token punctuation">)</span> <span class="token string">&quot;2&quot;</span>
+7<span class="token punctuation">)</span> <span class="token string">&quot;three&quot;</span>
+8<span class="token punctuation">)</span> <span class="token string">&quot;3&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div><p><code>ZRANK</code>：返回存储在 key 处的排序集合中成员的等级，分数从低到高排列。排名(或指数)是基于 0 的，这意味着得分最低的成员的排名为 0。使用 <code>ZREVRANK</code> 获得元素的等级，分数从高到低排序。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZADD key027 1 one
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZADD key027 2 two
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZADD key027 3 three
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZRANK key027 <span class="token string">&quot;three&quot;</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 2
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZRANK key027 <span class="token string">&quot;four&quot;</span>
+<span class="token punctuation">(</span>nil<span class="token punctuation">)</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div></li> <li><p>Sorted Sets 通常用于索引存储在 Redis 中的数据。 例如，如果您有许多代表用户的哈希，则可以使用一个 Sorted Set ，其中元素以用户的年龄作为得分，而用户的 ID 作为值。 因此，使用 ZRANGEBYSCORE 检索给定年龄段的所有用户将非常简单快捷。</p> <p><code>ZRANGEBYSCORE</code>：返回排序集合中键值在最小值和最大值之间的所有元素（包括得分等于最小值或最大值的元素）。这些元素被认为是由低分到高分排序的。具有相同分数的元素按词法顺序返回。（这是 Redis 中排序集实现的一个属性，不涉及进一步的计算）可选的LIMIT 参数可以用来只获取匹配元素的范围（类似于 SQL 中的 <code>SELECT LIMIT offset, count</code>）。负数则返回偏移量中的所有元素。请注意，如果偏移量很大，在得到要返回的元素之前，需要遍历排序集合中的偏移元素，这可能会增加O(N)的时间复杂性。可选的 WITHSCORES 参数使得命令同时返回元素和它的得分，而不是单独返回元素。这个选项从Redis 2.0 开始就有了。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZADD key028 1 one
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZADD key028 2 two
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZADD key028 3 three
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZRANGEBYSCORE key028 <span class="token operator">-</span>inf <span class="token operator">+</span>inf
+1<span class="token punctuation">)</span> <span class="token string">&quot;one&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+3<span class="token punctuation">)</span> <span class="token string">&quot;three&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZRANGEBYSCORE key028 1 2
+1<span class="token punctuation">)</span> <span class="token string">&quot;one&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZRANGEBYSCORE key028 <span class="token punctuation">(</span>1 2
+1<span class="token punctuation">)</span> <span class="token string">&quot;two&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; ZRANGEBYSCORE key028 <span class="token punctuation">(</span>1 <span class="token punctuation">(</span>2
+<span class="token punctuation">(</span>empty list or <span class="token function">set</span><span class="token punctuation">)</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div></li></ul> <h3 id="_1-5-hashes"><a href="#_1-5-hashes" class="header-anchor">#</a> 1.5. Hashes</h3> <p>Redis Hashes 是字符串字段和字符串值之间的映射，因此它们是表示对象的理想数据类型（例如，一个用户有许多字段必比如： 姓名，年龄等）。</p> <p>具有几个字段（其中几个意味着最多一百个左右）的 Hash 以占用很少空间的方式存储，因此可以在小型 Redis 实例中存储数百万个对象。</p> <p>尽管 Hashes 主要用于表示对象，但是它们有能力存储许多元素，因此也可以将 Hashes 用于许多其他任务。</p> <p>每个 Hash 可以存储 2<sup>32</sup> - 1 个键值对（超过 40 亿）。</p> <p><code>HMSET</code>：将指定字段设置为存储在钥匙处的散列中的相应值。该命令会覆盖散列中已有的任何指定字段。如果 key 不存在，则会创建一个新的 key 来存放哈希值。根据 Redis 4.0.0，<code>HMSET</code> 被认为是过时的。请在新代码中使用 <code>HSET</code>。
+<code>HSET</code>：将存储在 key 的哈希字段设置为值。如果 key 不存在，则会创建一个新的 key 来存放哈希。如果字段已经存在于哈希中，则会被覆盖。从 Redis 4.0.0 开始，<code>HSET</code> 是可变的，允许多个字段/值对。
+<code>HGETALL</code>：返回存储在 key 处的 hash 的所有字段和值。在返回的值中，每个字段名后面都跟着它的值，所以回复的长度是哈希大小的两倍。</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; HMSET key024 username tom password 1234 age 18
+OK
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; HGETALL key024
+1<span class="token punctuation">)</span> <span class="token string">&quot;username&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;tom&quot;</span>
+3<span class="token punctuation">)</span> <span class="token string">&quot;password&quot;</span>
+4<span class="token punctuation">)</span> <span class="token string">&quot;1234&quot;</span>
+5<span class="token punctuation">)</span> <span class="token string">&quot;age&quot;</span>
+6<span class="token punctuation">)</span> <span class="token string">&quot;18&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; HMSET key024 gender boy
+OK
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; HGETALL key024
+1<span class="token punctuation">)</span> <span class="token string">&quot;username&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;tom&quot;</span>
+3<span class="token punctuation">)</span> <span class="token string">&quot;password&quot;</span>
+4<span class="token punctuation">)</span> <span class="token string">&quot;1234&quot;</span>
+5<span class="token punctuation">)</span> <span class="token string">&quot;age&quot;</span>
+6<span class="token punctuation">)</span> <span class="token string">&quot;18&quot;</span>
+7<span class="token punctuation">)</span> <span class="token string">&quot;gender&quot;</span>
+8<span class="token punctuation">)</span> <span class="token string">&quot;boy&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; HSET key024 gender girl
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 0
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; HGETALL key024
+1<span class="token punctuation">)</span> <span class="token string">&quot;username&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;tom&quot;</span>
+3<span class="token punctuation">)</span> <span class="token string">&quot;password&quot;</span>
+4<span class="token punctuation">)</span> <span class="token string">&quot;1234&quot;</span>
+5<span class="token punctuation">)</span> <span class="token string">&quot;age&quot;</span>
+6<span class="token punctuation">)</span> <span class="token string">&quot;18&quot;</span>
+7<span class="token punctuation">)</span> <span class="token string">&quot;gender&quot;</span>
+8<span class="token punctuation">)</span> <span class="token string">&quot;girl&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; HSET key025 gender girl
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 1
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt; HGETALL key025
+1<span class="token punctuation">)</span> <span class="token string">&quot;gender&quot;</span>
+2<span class="token punctuation">)</span> <span class="token string">&quot;girl&quot;</span>
+127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:6379&gt;
+</code></pre></div><h2 id="_2-其他数据类型"><a href="#_2-其他数据类型" class="header-anchor">#</a> 2. 其他数据类型</h2> <h3 id="_2-1-bitmaps-and-hyperloglogs"><a href="#_2-1-bitmaps-and-hyperloglogs" class="header-anchor">#</a> 2.1. Bitmaps and HyperLogLogs</h3> <blockquote><p>Redis 还支持 Bitmaps 和 HyperLogLogs ，它们实际上是基于String基本类型的数据类型，但是具有自己的语义。</p></blockquote> <p>later on ...</p> <h3 id="_2-2-streams"><a href="#_2-2-streams" class="header-anchor">#</a> 2.2. Streams</h3> <p>later on ...</p></div> <footer><!----> <hr> <!----></footer></article> <div class="sticker vuepress-toc"><div class="vuepress-toc-item vuepress-toc-h2 active"><a href="#_1-redis-常见数据类型" title="1. Redis 常见数据类型">1. Redis 常见数据类型</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#_1-1-string" title="1.1. String">1.1. String</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#_1-2-lists" title="1.2. Lists">1.2. Lists</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#_1-3-sets" title="1.3. Sets">1.3. Sets</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#_1-4-sorted-sets" title="1.4. Sorted sets">1.4. Sorted sets</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#_1-5-hashes" title="1.5. Hashes">1.5. Hashes</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#_2-其他数据类型" title="2. 其他数据类型">2. 其他数据类型</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#_2-1-bitmaps-and-hyperloglogs" title="2.1. Bitmaps and HyperLogLogs">2.1. Bitmaps and HyperLogLogs</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#_2-2-streams" title="2.2. Streams">2.2. Streams</a></div></div></div></div> <footer class="footer" data-v-3d9deeb8><div class="footer-left-wrap" data-v-3d9deeb8><ul class="contact" data-v-3d9deeb8><li class="contact-item" data-v-3d9deeb8><a href="https://github.com/vuejs/vuepress" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-3d9deeb8><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github" data-v-3d9deeb8><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" data-v-3d9deeb8></path></svg>
+          
+        </a></li></ul></div> <div class="footer-right-wrap" data-v-3d9deeb8><ul class="copyright" data-v-3d9deeb8><li class="copyright-item" data-v-3d9deeb8><a href="https://policies.google.com/privacy?hl=en-US" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-3d9deeb8>Privacy Policy</a></li><li class="copyright-item" data-v-3d9deeb8>MIT Licensed | Copyright © 2018-present Vue.js</li></ul></div></footer></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/vssue-comment/assets/js/app.9fa4f4bb.js" defer></script><script src="/vssue-comment/assets/js/13.044f1fde.js" defer></script><script src="/vssue-comment/assets/js/3.f0de84e7.js" defer></script><script src="/vssue-comment/assets/js/35.3bbd155f.js" defer></script>
+  </body>
+</html>
